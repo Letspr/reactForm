@@ -1,29 +1,32 @@
-import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import React, {useRef} from "react";
 import {
-  Form,
   Button,
   ButtonGroup,
-  InputGroup,
-  Container,
-  Row,
-  Col,
   Card,
+  Col,
+  Container,
+  Form,
+  Row
 } from "react-bootstrap";
-import { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { resetForm, setFile } from "../actions/formularioActions";
 import "./FormularioBootstrap.css";
 
 function FormularioBootstrap() {
-  const [file, setFile] = useState(null);
-  const [counter, setCounter] = useState(0);
+  const dispatch = useDispatch();
+  const file = useSelector((state) => state.formulario.file);
+  const fileInput = useRef(null); 
 
   const handleChange = (e) => {
-    setFile(e.target.files[0]);
+    dispatch(setFile(e.target.files[0]));
   };
 
   const handleReset = (e) => {
-    setFile(null);
-    setCounter(counter + 1);
+    dispatch(resetForm());
+    if (fileInput.current) {
+      fileInput.current.value = null; // Limpiar el input del archivo
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -58,10 +61,10 @@ function FormularioBootstrap() {
                 type="file"
                 className="transparent-input"
                 onChange={handleChange}
-                key={counter}
+                ref = {fileInput}
               />
             </Form.Group>
-           {/*  <Form.Group controlId="formFileMultiple" className="mb-3">
+            {/*  <Form.Group controlId="formFileMultiple" className="mb-3">
               <Form.Control
                 type="file"
                 className="transparent-input"

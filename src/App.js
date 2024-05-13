@@ -1,21 +1,22 @@
+import { Provider } from "react-redux";
 import "./App.css";
-import Formulario1 from "./components/Formulario1";
 import FormularioBootstrap from "./components/FormularioBootstrap";
 import NavbarBootstrap from "./components/NavbarBootstrap";
+import store from "./store";
 
 function App() {
   return (
+    <Provider store={store}>
     <div className="App">
       <header className="App-header">
         <NavbarBootstrap/>
       </header>
       <main>
-       <br/>
-       <Formulario1 />
         <br/>
         <FormularioBootstrap />
       </main>
     </div>
+    </Provider>
   );
 }
 
