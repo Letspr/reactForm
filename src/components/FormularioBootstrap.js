@@ -49,7 +49,7 @@ function FormularioBootstrap() {
   };
 
   return (
-    <Container>
+    <Container className="mt-md-5">
       <Row className="justify-content-md-center">
         <Col xs={12} sm={10} md={8} lg={6} className="cuadro-formulario">
           <Card.Title className="custom-title">
